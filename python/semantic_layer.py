@@ -1,4 +1,4 @@
-from helpers.types import Dataset, Dimension, Fact, Join
+from helpers.types import Dataset, Grain, Dimension, Fact, Join, MultiJoin
 
 Customers = Dataset(
     id = 'customers',
