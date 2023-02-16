@@ -1,0 +1,142 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Gooddata LDM",
+    "description": "JSON Schema for Gooddata logical data model",
+    "oneOf": [
+        { "$ref": "#/$defs/dataset" },
+        {
+            "type": "object",
+            "additionalProperties": false,
+            "patternProperties": {
+                ".*": {
+                    "$ref": "#/$defs/dataset"
+                }
+            } 
+        }
+    ],
+    "$defs": {
+        "title": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "tags": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "string"
+            }
+        },
+        "identifier": {
+            "type": "string"
+        },
+        "source_column": {
+            "type": "string"
+        },
+        "field": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "$ref": "#/$defs/title"
+                },
+                "description": {
+                    "$ref": "#/$defs/description"
+                },
+                "tags": {
+                    "$ref": "#/$defs/tags"
+                },
+                "source_column": {
+                    "$ref": "#/$defs/source_column"
+                }
+            }
+        },
+        "fields": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "#/$defs/identifier"
+                    },
+                    {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "patternProperties": {
+                            ".*": {
+                                "$ref": "#/$defs/field"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "dataset": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "An ID of the dataset"
+                },
+                "title": {
+                    "$ref": "#/$defs/title",
+                    "description": "A human readable title of the dataset"
+                },
+                "description": {
+                    "$ref": "#/$defs/description",
+                    "description": "A human readable description of the dataset"
+                },
+                "tags": {
+                    "$ref": "#/$defs/tags",
+                    "description": "A list of tags for the dataset"
+                },
+                "data_source": {
+                    "type": "string",
+                    "description": "A data source for the dataset in format \"<data_source_id>.<table_name>\", for example \"my_datasource.my_table\""
+                },
+                "grain": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/identifier"
+                    }
+                },
+                "facts": {
+                    "$ref": "#/$defs/fields",
+                    "description": "A list of facts in this dataset"
+                },
+                "dimensions": {
+                    "$ref": "#/$defs/fields",
+                    "description": "A list of dimensions in this dataset"
+                },
+                "joins": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "dataset": {
+                                "type": "string"
+                            },
+                            "source_column": {
+                                "type": "string"
+                            },
+                            "multivalue": {
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "dataset",
+                            "source_column"
+                        ]
+                    },
+                    "description": "A list of joins in this dataset"
+                }
+            },
+            "required": [
+                "id",
+                "data_source"
+            ]
+        }
+    }
+}
