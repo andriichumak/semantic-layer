@@ -22,14 +22,16 @@ class Fact:
 class Join:
     dataset: Union['Dataset', str]
     using: Union[list[str], str]
-    multivalue: Optional[bool]
+
+@dataclass
+class MultiJoin(Join):
+    pass
 
 @dataclass
 class Dataset:
     id: str
     data_source: str
     title: Optional[str]
-    include_all_fields: bool
     tags: Optional[TagList]
     fields: list[Union[Dimension, Fact]]
-    joins: list[Join]
+    joins: list[Union[Join, MultiJoin]]

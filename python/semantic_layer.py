@@ -1,17 +1,18 @@
-from helpers.types import Dataset, Attribute, Fact, Join
+from helpers.types import Dataset, Dimension, Fact, Join
 
-Products = Dataset(
-    id = 'products',
-    data_source = 'ecommerce.products',
-
+Customers = Dataset(
+    id = 'customers',
+    data_source = 'ecommerce.customers',
+    title = 'Customers',
+    description = 'Customers dimension',
+    tags = [ 'ecommerce', 'customers' ],
     fields = [
-        Grain('product_id')
-    ],
-
-    include_all_fields = true
+        Grain('customer_id'),
+        Fact('age'),
+        Dimension('full_name'),
+        Dimension('gender')
+    ]
 )
-
-Customers = Dataset('customers', 'ecommerce.customers', fields = [ Grain('customer_id') ], include_all_fields = true)
 
 Dates = Dataset(
     id = 'dates',
@@ -31,7 +32,33 @@ Dates = Dataset(
     ]
 )
 
-Promotions = Dataset('promotions', 'ecommerce.promotions', fields = [ Grain('promotion_id') ], include_all_fields = true)
+Products = Dataset('products', 'ecommerce.products', fields = [
+    Grain('product_id'),
+    Fact('unit_price'),
+    Dimension('name'),
+    Dimention('product_line')
+])
+
+Promotions = Dataset(
+    'promotions',
+    'ecommerce.promotions',
+
+    title = 'Promotions',
+    description = 'Ads and promotions dimension',
+    tags = [ 'ecommerce', 'promo', 'ads' ],
+    
+    fields = [
+        Grain('promotion_id'),
+        Dimension('promo_name'),
+        Dimension('ad_type'),
+        Dimension(
+            'coupon_type',
+            title = 'Voucher type',
+            description = 'A type of the coupon used, e.g. "discount", "3 for the price of 2" etc.'
+        ),
+        Dimension('price_reduction_type')
+    ]
+)
 
 Orders = Dataset(
     id = 'orders',
@@ -54,7 +81,7 @@ Orders = Dataset(
     ],
 
     joins = [
-        Join(dataset = Products, using = 'product_id', multivalue = false),
+        MultiJoin(dataset = Products, using = 'product_id'),
         Join(Customers, 'customer_id'),
         Join(Dates, 'date'),
         Join(Promotions, 'promotion_id')

@@ -27,7 +27,7 @@ dimensions:
 joins:
   - dataset: products
     source_column: product_id
-    multivalue: false
+    multivalue: true
   - dataset: customers
     source_column: customer_id
   - dataset: dates
