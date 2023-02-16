@@ -131,6 +131,9 @@
                         ]
                     },
                     "description": "A list of joins in this dataset"
+                },
+                "include_all_fields": {
+                    "type": "boolean"
                 }
             },
             "required": [

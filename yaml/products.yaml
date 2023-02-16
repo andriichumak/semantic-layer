@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=https://andriichumak.github.io/semantic-layer/public/schema.json
+id: products
+data_source: ecommerce.products
+
+grain:
+  - product_id
+
+# implicitly include all fields from the source table
+include_all_fields: true

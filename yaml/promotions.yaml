@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://andriichumak.github.io/semantic-layer/public/schema.json
+id: promotions
+data_source: ecommerce.promotions
+
+title: Promotions
+description: Ads and promotions dimension
+tags:
+  - ecommerce
+  - promo
+  - ads
+
+grain:
+  - promotion_id
+
+dimensions:
+  - promotion_id
+  - name
+  - ad_type
+  - coupon_type:
+      title: Voucher type
+      description: A type of the coupon used, e.g. "discount", "3 for the price of 2" etc.
+  - price_reduction_type

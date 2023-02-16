@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://andriichumak.github.io/semantic-layer/public/schema.json
+id: orders
+data_source: ecommerce.orders
+
+title: Orders
+description: Dataset with facts, containing a list of orders
+tags:
+  - ecommerce
+  - orders
+
+grain:
+  - order_id
+
+facts:
+  - revenue:
+      title: Revenue
+      description: A total revenue for the order
+      tags:
+        - ecommerce
+        - revenue
+      source_column: revenue
+  - units_sold # A shorthand fact definition. Title and source_column are derived from id
+
+dimensions:
+  - order_id
+
+joins:
+  - dataset: products
+    source_column: product_id
+    multivalue: false
+  - dataset: customers
+    source_column: customer_id
+  - dataset: dates
+    source_column: date
+  - dataset: promotions
+    source_column: promotion_id
