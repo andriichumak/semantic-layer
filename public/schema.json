@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Gooddata LDM",
-    "description": "JSON Schema for Gooddata logical data model",
+    "title": "LDM",
+    "description": "JSON schema for Semantic layer / Logical Data Model",
     "oneOf": [
         { "$ref": "#/$defs/dataset" },
         {
