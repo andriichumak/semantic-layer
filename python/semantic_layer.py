@@ -55,7 +55,7 @@ Orders = Dataset(
 
     joins = [
         Join(dataset = Products, using = 'product_id', multivalue = false),
-        Join(Custoemrs, 'customer_id'),
+        Join(Customers, 'customer_id'),
         Join(Dates, 'date'),
         Join(Promotions, 'promotion_id')
     ]
