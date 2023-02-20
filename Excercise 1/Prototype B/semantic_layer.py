@@ -6,8 +6,8 @@ Customers = Dataset(
     title = 'Customers',
     description = 'Customers dimension',
     tags = [ 'ecommerce', 'customers' ],
+    grain = Grain('customer_id'),
     fields = [
-        Grain('customer_id'),
         Fact('age'),
         Dimension('full_name'),
         Dimension('gender')
@@ -22,8 +22,8 @@ Dates = Dataset(
     description = 'Defines date / time dimension',
     tags = [ 'ecommerce', 'date' ],
     
+    grain = Grain('date'),
     fields = [
-        Grain('date'),
         Dimension('year'),
         Dimension('quarter'),
         Dimension('week'),
@@ -32,8 +32,7 @@ Dates = Dataset(
     ]
 )
 
-Products = Dataset('products', 'ecommerce.products', fields = [
-    Grain('product_id'),
+Products = Dataset('products', 'ecommerce.products', grain = Grain('product_id'), fields = [
     Fact('unit_price'),
     Dimension('name'),
     Dimention('product_line')
@@ -47,8 +46,8 @@ Promotions = Dataset(
     description = 'Ads and promotions dimension',
     tags = [ 'ecommerce', 'promo', 'ads' ],
     
+    grain = Grain('promotion_id'),
     fields = [
-        Grain('promotion_id'),
         Dimension('promo_name'),
         Dimension('ad_type'),
         Dimension(
@@ -68,8 +67,8 @@ Orders = Dataset(
     description = 'Dataset with facts, containing a list of orders',
     tags = [ 'ecommerce', 'orders' ],
 
+    grain = Grain('order_id'),
     fields = [
-        Grain('order_id'),
         Fact(
             id = 'revenue',
             title = 'Revenue',
