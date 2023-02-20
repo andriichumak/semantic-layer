@@ -33,5 +33,6 @@ class Dataset:
     data_source: str
     title: Optional[str]
     tags: Optional[TagList]
+    grain: Grain
     fields: list[Union[Dimension, Fact]]
     joins: list[Union[Join, MultiJoin]]
