@@ -130,7 +130,8 @@
                             },
                             "type": {
                                 "type": "string",
-                                "enum": [ "1-N", "M-N" ]
+                                "enum": [ "1-N", "M-N" ],
+                                "description": "Define a type of join. Can be \"1-N\" or \"M-N\". Optional, defaults to \"1-N\"."
                             }
                         },
                         "required": [
@@ -142,7 +143,8 @@
                 },
                 "accept_fields": {
                     "type": "string",
-                    "enum": [ "all" ]
+                    "enum": [ "all" ],
+                    "description": "Define which fields should be includes auto-magically from the source table or view. Use \"all\" to include all fields."
                 }
             },
             "required": [
