@@ -4,21 +4,18 @@ data_source: ecommerce.orders
 
 title: Orders
 description: Dataset with facts, containing a list of orders
-tags:
-  - ecommerce
-  - orders
 
 grain:
   - order_id
 
 facts:
-  - revenue:
-      title: Revenue
-      description: A total revenue for the order
+  - price:
+      title: Price
+      description: A total price of the order
       tags:
         - ecommerce
-        - revenue
-      source_column: revenue
+        - price
+      source_column: price
   - units_sold # A shorthand fact definition. Title and source_column are derived from id
 
 dimensions:
@@ -27,7 +24,7 @@ dimensions:
 joins:
   - dataset: products
     source_column: product_id
-    multivalue: true
+    type: M-N
   - dataset: customers
     source_column: customer_id
   - dataset: dates

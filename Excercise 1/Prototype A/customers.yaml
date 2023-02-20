@@ -4,12 +4,9 @@ data_source: ecommerce.customers
 
 title: Customers
 description: Customers dimension
-tags:
-  - ecommerce
-  - customers
 
 grain:
   - customer_id
 
 # implicitly include all fields from the source table
-include_all_fields: true
+accept_fields: all

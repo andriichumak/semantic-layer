@@ -6,4 +6,4 @@ grain:
   - product_id
 
 # implicitly include all fields from the source table
-include_all_fields: true
+accept_fields: all

@@ -5,7 +5,6 @@ Customers = Dataset(
     data_source = 'ecommerce.customers',
     title = 'Customers',
     description = 'Customers dimension',
-    tags = [ 'ecommerce', 'customers' ],
     grain = Grain('customer_id'),
     fields = [
         Fact('age'),
@@ -53,7 +52,7 @@ Promotions = Dataset(
         Dimension(
             'coupon_type',
             title = 'Voucher type',
-            description = 'A type of the coupon used, e.g. "discount", "3 for the price of 2" etc.'
+            description = 'A type of the voucher used, e.g. "discount", "3 for the price of 2" etc.'
         ),
         Dimension('price_reduction_type')
     ]
@@ -65,16 +64,15 @@ Orders = Dataset(
 
     title = 'Orders',
     description = 'Dataset with facts, containing a list of orders',
-    tags = [ 'ecommerce', 'orders' ],
 
     grain = Grain('order_id'),
     fields = [
         Fact(
-            id = 'revenue',
-            title = 'Revenue',
-            description = 'A total revenue for the order',
-            tags = [ 'ecommerce', 'revenue' ],
-            source_column = 'revenue'
+            id = 'price',
+            title = 'Price',
+            description = 'A total price of the order',
+            tags = [ 'ecommerce', 'price' ],
+            source_column = 'price'
         ),
         Fact('units_sold')
     ],

@@ -18,5 +18,5 @@ dimensions:
   - ad_type
   - coupon_type:
       title: Voucher type
-      description: A type of the coupon used, e.g. "discount", "3 for the price of 2" etc.
+      description: A type of the voucher used, e.g. "discount", "3 for the price of 2" etc.
   - price_reduction_type

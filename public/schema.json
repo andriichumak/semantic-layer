@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "LDM",
-    "description": "JSON schema for Semantic layer / Logical Data Model",
+    "description": "JSON schema for Semantic layer / Logical Data Model.",
     "oneOf": [
         { "$ref": "#/$defs/dataset" },
         {
@@ -39,16 +39,20 @@
             "additionalProperties": false,
             "properties": {
                 "title": {
-                    "$ref": "#/$defs/title"
+                    "$ref": "#/$defs/title",
+                    "description": "A human readable title of the field. Optional, derived from id if not provided explicitly."
                 },
                 "description": {
-                    "$ref": "#/$defs/description"
+                    "$ref": "#/$defs/description",
+                    "descriprion": "An optional description of the field."
                 },
                 "tags": {
-                    "$ref": "#/$defs/tags"
+                    "$ref": "#/$defs/tags",
+                    "tags": "A list of strings - metadata tags for this field."
                 },
                 "source_column": {
-                    "$ref": "#/$defs/source_column"
+                    "$ref": "#/$defs/source_column",
+                    "description": "A column name in the physical database. Optional, equals to id by default."
                 }
             }
         },
@@ -77,37 +81,38 @@
             "properties": {
                 "id": {
                     "type": "string",
-                    "description": "An ID of the dataset"
+                    "description": "A unique identifier of the dataset."
                 },
                 "title": {
                     "$ref": "#/$defs/title",
-                    "description": "A human readable title of the dataset"
+                    "description": "An optional human readable title for the dataset. Will be derived from id if not provided explicitly."
                 },
                 "description": {
                     "$ref": "#/$defs/description",
-                    "description": "A human readable description of the dataset"
+                    "description": "An optional description of the dataset."
                 },
                 "tags": {
                     "$ref": "#/$defs/tags",
-                    "description": "A list of tags for the dataset"
+                    "description": "A list of strings - metadata tags of this dataset."
                 },
                 "data_source": {
                     "type": "string",
-                    "description": "A data source for the dataset in format \"<data_source_id>.<table_name>\", for example \"my_datasource.my_table\""
+                    "description": "A data source of the dataset in format \"<data_source_id>.<table_name>\", for example \"my_datasource.my_table\"."
                 },
                 "grain": {
                     "type": "array",
                     "items": {
                         "$ref": "#/$defs/identifier"
-                    }
+                    },
+                    "description": "A primary key for the given dataset."
                 },
                 "facts": {
                     "$ref": "#/$defs/fields",
-                    "description": "A list of facts in this dataset"
+                    "description": "A list of facts in this dataset.\nEach item is either a field Id (a shortcut syntax) or an object with a single key - the field Id - and value representing the field metadata."
                 },
                 "dimensions": {
                     "$ref": "#/$defs/fields",
-                    "description": "A list of dimensions in this dataset"
+                    "description": "A list of dimensions in this dataset.\nEach item is either a dimension Id (a shortcut syntax) or an object with a single key - the dimension Id - and value representing the dimension metadata."
                 },
                 "joins": {
                     "type": "array",
@@ -116,13 +121,16 @@
                         "additionalProperties": false,
                         "properties": {
                             "dataset": {
-                                "type": "string"
+                                "type": "string",
+                                "description": "A dataset id to join to."
                             },
                             "source_column": {
-                                "type": "string"
+                                "type": "string",
+                                "descriprion": "A name of the source column in the physical database for the current dataset."
                             },
-                            "multivalue": {
-                                "type": "boolean"
+                            "type": {
+                                "type": "string",
+                                "enum": [ "1-N", "M-N" ]
                             }
                         },
                         "required": [
@@ -130,10 +138,11 @@
                             "source_column"
                         ]
                     },
-                    "description": "A list of joins in this dataset"
+                    "description": "A list of joins, specifies the relations between datasets.\nForeign dataset is defined in \"dataset\" attribute and will always be joined by it's grain.\nCurrent dataset will be join by the column name defined in \"using\" attribute."
                 },
-                "include_all_fields": {
-                    "type": "boolean"
+                "accept_fields": {
+                    "type": "string",
+                    "enum": [ "all" ]
                 }
             },
             "required": [
