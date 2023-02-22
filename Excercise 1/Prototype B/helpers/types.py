@@ -146,4 +146,4 @@ class Dataset:
     description: Optional[str]
     tags: Optional[TagList]
     fields: list[Union[Dimension, Fact]]
-    joins: Optional[list[Union[Join, MultiJoin]]]
+    joins: Optional[list[Union[Join, JoinMtoN]]]

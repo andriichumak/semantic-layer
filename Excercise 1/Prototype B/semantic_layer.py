@@ -78,7 +78,7 @@ Orders = Dataset(
     ],
 
     joins = [
-        MultiJoin(dataset = Products, using = 'product_id'),
+        JoinMtoN(dataset = Products, using = 'product_id'),
         Join(Customers, 'customer_id'),
         Join(Dates, 'date'),
         Join(Promotions, 'promotion_id')
